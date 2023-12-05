@@ -7,14 +7,6 @@ plugins {
 	id "org.sonarqube" version "4.4.1.3373"
 }
 
-sonar {
-  properties {
-    property "sonar.projectKey", "Good-Food-Delivery_restaurant"
-    property "sonar.organization", "good-food-delivery"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
-}
-
 group = 'good-food-delivery'
 version = '0.0.1-SNAPSHOT'
 
@@ -30,7 +22,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	implementation 'com.mysql:mysql-connector-j:8.1.0'
-	annotationProcessor  'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.1.2'
+	implementation 'org.springframework.security:spring-security-web:6.1.2'
+	implementation 'org.springframework.security:spring-security-config:6.1.2'
+	implementation 'org.springframework.security:spring-security-crypto:6.1.2'
+    annotationProcessor  'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
