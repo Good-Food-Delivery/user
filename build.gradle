@@ -7,6 +7,14 @@ plugins {
 	id "org.sonarqube" version "4.4.1.3373"
 }
 
+sonar {
+  properties {
+    property "sonar.projectKey", "Good-Food-Delivery_user"
+    property "sonar.organization", "good-food-delivery"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
+
 group = 'good-food-delivery'
 version = '0.0.1-SNAPSHOT'
 
