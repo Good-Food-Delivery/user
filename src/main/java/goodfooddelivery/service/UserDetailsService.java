@@ -3,21 +3,19 @@ import goodfooddelivery.interfaces.IUserDetailsService;
 import goodfooddelivery.model.UserDetails;
 import goodfooddelivery.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsService implements IUserDetailsService {
 
-//    @Autowired
-//    UserDetailsRepository userDetailsRepository;
-
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    UserDetailsRepository userDetailsRepository;
 
-    public String saveUserDetails(UserDetails user)
+    public void createUserDetailsWithUserAuthId(Long userAuthId)
     {
-        return null;
+        UserDetails user = new UserDetails();
+        user.setUserAuthId(userAuthId);
+        userDetailsRepository.save(user);
     }
 
 }
