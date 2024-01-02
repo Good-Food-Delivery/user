@@ -1,6 +1,7 @@
 package goodfooddelivery;
 
 import goodfooddelivery.config.MQConfig;
+import goodfooddelivery.dto.response.UserMessage;
 import goodfooddelivery.interfaces.IUserDetailsService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,20 @@ public class MessageListener {
     private IUserDetailsService userDetailsService;
 
     @RabbitListener(queues = MQConfig.QUEUE)
-    public void listener(Long userAuthId) {
-        System.out.println("Received userAuthId: " + userAuthId);
-        // Invoke the UserService method to create a user or perform actions with the received userAuthId
-        userDetailsService.createUserDetailsWithUserAuthId(userAuthId);
-        // Or perform other necessary actions with the received userAuthId
+    public void listener(UserMessage userMessage) {
+
+        Long userAuthId = userMessage.getUserAuthId();
+        String action = userMessage.getAction();
+
+        System.out.println("Received userAuthId: " + userAuthId + "with action: " + action);
+
+        switch (action)
+        {
+            case "CREATE":
+                userDetailsService.createUserDetailsWithUserAuthId(userAuthId);
+                break;
+            case "DELETE":
+                userDetailsService.deleteUserDetailsWithUserAuthId(userAuthId);
+        }
     }
 }
